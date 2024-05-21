@@ -6,16 +6,16 @@ FactoryBot.define do
   end
 
   factory :application_interview_event, class: 'Application::Event::Interview', parent: :application_event do
-    data { { interview_date: DateTime.new(2024, 5, 5, 9) } }
+    interview_date { DateTime.new(2024, 5, 5, 9) }
   end
 
   factory :application_hired_event, class: 'Application::Event::Hired', parent: :application_event do
-    data { { hire_date: DateTime.new(2024, 5, 10,) } }
+    hire_date { DateTime.new(2024, 5, 10) }
   end
 
   factory :application_rejected_event, class: 'Application::Event::Rejected', parent: :application_event
 
   factory :application_note_event, class: 'Application::Event::Note', parent: :application_event do
-    data { { content: 'Note example' } }
+    content { 'Note example' }
   end
 end
