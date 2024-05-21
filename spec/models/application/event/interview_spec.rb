@@ -10,4 +10,12 @@ RSpec.describe Application::Event::Interview, type: :model do
     expect(interview_event).to respond_to(:interview_date)
     expect(interview_event.interview_date).to eq(datetime_now)
   end
+
+  describe '#status' do
+    it 'returns `inteview` status' do
+      interview_event = create(:application_interview_event)
+
+      expect(interview_event.status).to eq('interview')
+    end
+  end
 end

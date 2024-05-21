@@ -10,4 +10,12 @@ RSpec.describe Application::Event::Hired, type: :model do
     expect(hired_event).to respond_to(:hire_date)
     expect(hired_event.hire_date).to eq(datetime_now)
   end
+
+  describe '#status' do
+    it 'returns `hired` status' do
+      hired_event = create(:application_hired_event)
+
+      expect(hired_event.status).to eq('hired')
+    end
+  end
 end
