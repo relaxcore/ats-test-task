@@ -5,6 +5,16 @@ class Application < ApplicationRecord
 
   has_many :events, dependent: :restrict_with_error
 
+  scope :hired, -> { joins(:events).where(application_events: { type: Application::Event::Hired.name }) }
+  scope :rejected, -> { joins(:events).where(application_events: { type: Application::Event::Rejected.name }) }
+  scope :ongoing, lambda {
+    where.not(
+      id: Application::Event.where(
+        type: [Application::Event::Hired.name, Application::Event::Rejected.name]
+      ).select(:application_id)
+    )
+  }
+
   scope :with_active_job, lambda {
     joins(job: :events).joins(
       "INNER JOIN (
