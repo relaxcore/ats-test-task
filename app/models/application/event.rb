@@ -4,6 +4,8 @@ class Application
   class Event < ApplicationRecord
     belongs_to :application
 
+    scope :interviews, -> { where(type: 'Application::Event::Interview') }
+    scope :notes, -> { where(type: 'Application::Event::Note') }
     scope :excluding_notes, -> { where.not(type: 'Application::Event::Note') }
 
     def status

@@ -26,6 +26,14 @@ class Application < ApplicationRecord
     ).where(job_events: { type: 'Job::Event::Activated' })
   }
 
+  def last_interview_date
+    events.interviews.last&.interview_date
+  end
+
+  def notes_count
+    events.notes.count
+  end
+
   def status
     events.excluding_notes.last&.status || Application::Event::APPLIED_STATUS
   end
